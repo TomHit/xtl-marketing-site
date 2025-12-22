@@ -1,29 +1,63 @@
-// functions/api/validate-code.ts
 export const onRequestPost = async (context: any) => {
   try {
-    const { request } = context;
+    const { request, env } = context;
 
-    const body = await request.json().catch(() => ({}));
-    const code = String(body?.code || "").trim();
-
-    if (!code) {
-      return j({ ok: false, error: "missing_code" }, 400);
+    // ---- auth (admin-only) ----
+    const adminKey = request.headers.get("x-admin-key") || "";
+    if (!env?.ADMIN_ISSUE_KEY || adminKey !== env.ADMIN_ISSUE_KEY) {
+      return j({ ok: false, error: "unauthorized" }, 401);
     }
 
-    // forward to your verify endpoint
-    const res = await fetch("https://xautrendlab.com/api/access/verify", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ code }),
-    });
+    const kv = env?.CODES_KV; // MUST match Cloudflare KV binding name
+    if (!kv) return j({ ok: false, error: "kv_not_bound" }, 500);
 
-    const jres = await res.json().catch(() => ({}));
+    const body = await request.json().catch(() => ({}));
+    const email = String(body.email || "").trim().toLowerCase() || null;
+    const plan = String(body.plan || "beta").trim();
+    const days = Number(body.days || 30);
+    const maxUses = Number(body.max_uses || 1);
+    const prefix = String(body.prefix || "XTL-").trim();
 
-    return j(jres, res.status);
+    const code = await issueUniqueCode(kv, prefix);
+
+    const nowMs = Date.now();
+    const expiresMs = nowMs + Math.max(1, days) * 24 * 60 * 60 * 1000;
+
+    const rec = {
+      code,
+      email,
+      plan,
+      created_ms: nowMs,
+      expires_ms: expiresMs,
+      max_uses: maxUses,
+      used_count: 0,
+    };
+
+    // Auto-cleanup after expiry
+    const ttl = Math.max(60, Math.floor((expiresMs - nowMs) / 1000));
+    await kv.put(`code:${code}`, JSON.stringify(rec), { expirationTtl: ttl });
+
+    return j({ ok: true, code, expires_ms: expiresMs });
   } catch (e: any) {
     return j({ ok: false, error: e?.message || "server_error" }, 500);
   }
 };
+
+async function issueUniqueCode(kv: any, prefix: string) {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const rand = () => {
+    let s = "";
+    for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return s;
+  };
+
+  for (let i = 0; i < 10; i++) {
+    const code = `${prefix}${rand()}`;
+    const exists = await kv.get(`code:${code}`);
+    if (!exists) return code;
+  }
+  throw new Error("failed_to_issue_code");
+}
 
 function j(obj: any, status = 200) {
   return new Response(JSON.stringify(obj), {
