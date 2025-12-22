@@ -1,127 +1,127 @@
-import React, { useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-const NAV = [
-  {
-    label: "Product",
-    items: [
-      { label: "Overview", href: "/#product" },
-      { label: "Signals", href: "/#signals" },
-      { label: "MyBots", href: "/#mybots" },
-      { label: "Automation", href: "/#automation" },
-    ],
-  },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Docs", href: "https://app.xautrendlab.com/docs" },
-];
+const APP_ORIGIN = "https://app.xautrendlab.com";
+
+type MenuKey = "product" | "offerings" | null;
 
 export default function SiteHeader() {
-  const [open, setOpen] = useState(false);
-  const [prodOpen, setProdOpen] = useState(false);
+  const [open, setOpen] = useState<MenuKey>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target as Node)) setOpen(null);
+    }
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
+
+  const itemBtn =
+    "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5";
+  const linkCls =
+    "block rounded-lg px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5";
+  const panel =
+    "absolute left-0 top-full mt-2 w-64 rounded-2xl border border-white/10 bg-[#0b0b0e]/95 p-2 shadow-xl backdrop-blur";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="/" className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-xl bg-white/10" />
-          <div className="text-sm font-semibold tracking-tight text-white">XauTrendLab</div>
-        </a>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0b0e]/85 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" ref={ref}>
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-xl bg-white/10 ring-1 ring-white/10" />
+          <div className="leading-tight">
+            <div className="text-sm font-semibold tracking-wide text-white">XauTrendLab</div>
+            <div className="text-xs text-white/55">XTL Platform</div>
+          </div>
+        </Link>
 
-        {/* Desktop */}
-        <nav className="hidden items-center gap-7 md:flex">
+        {/* Nav */}
+        <nav className="hidden items-center gap-2 md:flex">
+          {/* Product dropdown */}
           <div className="relative">
             <button
-              onClick={() => setProdOpen((v) => !v)}
-              className="text-sm text-white/80 hover:text-white"
+              className={itemBtn}
+              onClick={() => setOpen(open === "product" ? null : "product")}
+              aria-haspopup="menu"
+              aria-expanded={open === "product"}
             >
-              Product ?
+              Product
+              <span className="text-white/60">▾</span>
             </button>
-            {prodOpen && (
-              <div className="absolute right-0 mt-3 w-52 rounded-xl border border-white/10 bg-black/90 p-2 shadow-xl">
-                {NAV[0].items!.map((x) => (
-                  <a
-                    key={x.href}
-                    href={x.href}
-                    className="block rounded-lg px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                  >
-                    {x.label}
-                  </a>
-                ))}
+            {open === "product" && (
+              <div className={panel} role="menu" aria-label="Product menu">
+                <Link className={linkCls} href="/product/overview" onClick={() => setOpen(null)}>
+                  Overview
+                </Link>
+                <Link className={linkCls} href="/product/architecture" onClick={() => setOpen(null)}>
+                  Platform Architecture
+                </Link>
+                <Link className={linkCls} href="/product/security" onClick={() => setOpen(null)}>
+                  Security & Execution
+                </Link>
               </div>
             )}
           </div>
 
-          <a className="text-sm text-white/80 hover:text-white" href={NAV[1].href as string}>
+          {/* Offerings dropdown */}
+          <div className="relative">
+            <button
+              className={itemBtn}
+              onClick={() => setOpen(open === "offerings" ? null : "offerings")}
+              aria-haspopup="menu"
+              aria-expanded={open === "offerings"}
+            >
+              Offerings
+              <span className="text-white/60">▾</span>
+            </button>
+            {open === "offerings" && (
+              <div className={panel} role="menu" aria-label="Offerings menu">
+                <Link className={linkCls} href="/offerings/signals" onClick={() => setOpen(null)}>
+                  Signals
+                </Link>
+                <Link className={linkCls} href="/offerings/mybots" onClick={() => setOpen(null)}>
+                  MyBots
+                </Link>
+                <Link className={linkCls} href="/offerings/automation" onClick={() => setOpen(null)}>
+                  Automated Trading
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link className={itemBtn} href="/pricing">
             Pricing
-          </a>
-          <a className="text-sm text-white/80 hover:text-white" href={NAV[2].href as string}>
+          </Link>
+
+          {/* Docs can be internal later; for now keep external placeholder */}
+          <a className={itemBtn} href="#" onClick={(e) => e.preventDefault()}>
             Docs
           </a>
 
           <a
-            href="https://app.xautrendlab.com/login"
-            className="rounded-lg border border-white/10 px-3 py-2 text-sm text-white/90 hover:border-white/20 hover:bg-white/5"
+            className="ml-2 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
+            href={`${APP_ORIGIN}/login`}
+            target="_blank"
+            rel="noreferrer"
           >
             Login
           </a>
-
-          <a
-            href="https://app.xautrendlab.com"
-            className="rounded-lg bg-white px-3 py-2 text-sm font-medium text-black hover:bg-white/90"
-          >
-            Open App
-          </a>
         </nav>
 
-        {/* Mobile button */}
-        <button
-          className="rounded-lg border border-white/10 px-3 py-2 text-sm text-white/90 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          Menu
-        </button>
-      </div>
-
-      {/* Mobile panel */}
-      {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/80 backdrop-blur">
-          <div className="mx-auto max-w-6xl px-6 py-4 space-y-2">
-            <div className="text-xs uppercase tracking-wider text-white/50">Product</div>
-            <div className="grid grid-cols-2 gap-2">
-              {NAV[0].items!.map((x) => (
-                <a
-                  key={x.href}
-                  href={x.href}
-                  className="rounded-lg border border-white/10 px-3 py-2 text-sm text-white/85 hover:bg-white/5"
-                >
-                  {x.label}
-                </a>
-              ))}
-            </div>
-
-            <a className="block rounded-lg border border-white/10 px-3 py-2 text-sm text-white/85" href={NAV[1].href as string}>
-              Pricing
-            </a>
-            <a className="block rounded-lg border border-white/10 px-3 py-2 text-sm text-white/85" href={NAV[2].href as string}>
-              Docs
-            </a>
-
-            <div className="flex gap-2 pt-2">
-              <a
-                href="https://app.xautrendlab.com/login"
-                className="flex-1 rounded-lg border border-white/10 px-3 py-2 text-center text-sm text-white/90"
-              >
-                Login
-              </a>
-              <a
-                href="https://app.xautrendlab.com"
-                className="flex-1 rounded-lg bg-white px-3 py-2 text-center text-sm font-medium text-black"
-              >
-                Open App
-              </a>
-            </div>
-          </div>
+        {/* Mobile (simple) */}
+        <div className="flex items-center gap-2 md:hidden">
+          <a
+            className="inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
+            href={`${APP_ORIGIN}/login`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Login
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 }

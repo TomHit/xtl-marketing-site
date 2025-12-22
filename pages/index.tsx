@@ -1,7 +1,31 @@
 import Head from "next/head";
-import SiteHeader from "../components/SiteHeader";
+import Link from "next/link";
+import SiteLayout from "../components/SiteLayout";
 
-const APP_ORIGIN = "https://app.xautrendlab.com"; // change if needed
+const APP_ORIGIN = "https://app.xautrendlab.com";
+
+function Card({
+  title,
+  desc,
+  href,
+}: {
+  title: string;
+  desc: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group block rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/[0.07]"
+    >
+      <div className="text-lg font-semibold">{title}</div>
+      <p className="mt-2 text-sm text-white/70">{desc}</p>
+      <div className="mt-4 text-sm font-medium text-white/80 group-hover:text-white">
+        Learn more →
+      </div>
+    </Link>
+  );
+}
 
 export default function Home() {
   return (
@@ -10,201 +34,135 @@ export default function Home() {
         <title>XTL — Trading Intelligence Platform</title>
         <meta
           name="description"
-          content="XTL is an AI-powered trading intelligence platform. Trade with signals, automate strategies using MyBots, or run fully hands-free execution."
+          content="XTL is a trading intelligence platform. Use Signals, configure MyBots, or run Automated Trading—all inside one product."
         />
       </Head>
 
-      <SiteHeader />
-
-      <main className="min-h-screen bg-[#0b0b0e] text-white">
+      <SiteLayout>
         {/* HERO */}
-        <section className="mx-auto max-w-6xl px-6 py-24">
-          <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-            AI-Powered Trading Intelligence
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/70">
-            From actionable signals to fully automated execution. XTL lets you
-            decide how much control you want.
-          </p>
+        <section className="mx-auto max-w-6xl px-6 pt-16 pb-14">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+              XTL — Trading Intelligence Platform
+            </h1>
+            <p className="mt-4 text-lg text-white/70">
+              One product that supports multiple trading paths: Signals for discretionary trading,
+              MyBots for strategy-driven execution, and Automated Trading for hands-free operation.
+            </p>
 
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a
-              href={APP_ORIGIN}
-              className="rounded-xl bg-white px-6 py-3 text-center text-sm font-medium text-black hover:bg-white/90"
-            >
-              Open Web App
-            </a>
-            <a
-              href="#how"
-              className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-medium text-white/90 hover:bg-white/5"
-            >
-              How XTL Works
-            </a>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/product/overview"
+                className="rounded-xl bg-white px-6 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
+              >
+                Explore Product
+              </Link>
+
+              <a
+                href={`${APP_ORIGIN}/login`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
+              >
+                Login to App
+              </a>
+            </div>
+
+            <p className="mt-4 text-sm text-white/55">
+              Note: Installer downloads are available inside the app after login.
+            </p>
           </div>
         </section>
 
-        {/* PRODUCT / OVERVIEW */}
-        <section id="product" className="border-t border-white/10 py-20">
+        {/* OFFERINGS SUMMARY (not full details) */}
+        <section className="border-t border-white/10 py-16">
           <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">
-              One Platform. Multiple Control Modes.
-            </h2>
-            <p className="mt-3 max-w-2xl text-white/70">
-              Start manual, automate gradually, or go fully hands-free.
+            <h2 className="text-2xl font-semibold md:text-3xl">Offerings</h2>
+            <p className="mt-3 max-w-3xl text-white/70">
+              Choose how you want to trade with XTL. Each offering has its own dedicated page with full details.
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               <Card
-                title="AI Signals"
-                desc="Action-ready intraday signals with entry logic, targets, stop-loss and confidence."
+                title="Signals"
+                href="/offerings/signals"
+                desc="AI-powered trade ideas with clear direction, risk context, and execution guidance."
               />
               <Card
                 title="MyBots"
-                desc="Convert strategies into automated execution with configurable risk rules."
+                href="/offerings/mybots"
+                desc="Configure what you want, then run execution via installer on your local machine/VPS."
               />
               <Card
-                title="Full Automation"
-                desc="Enable hands-free trading with continuous SL/TP and exit tracking."
+                title="Automated Trading"
+                href="/offerings/automation"
+                desc="Hands-free execution: entries, SL/TP, trailing, and tracking without manual intervention."
               />
             </div>
           </div>
         </section>
 
-        {/* SIGNALS */}
-        <section id="signals" className="py-20">
+        {/* HOW IT WORKS (high-level only) */}
+        <section className="border-t border-white/10 py-16">
           <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">Signals Built for Execution</h2>
-            <p className="mt-4 max-w-2xl text-white/70">
-              XTL signals are designed to be traded — manually or automatically.
-            </p>
+            <h2 className="text-2xl font-semibold md:text-3xl">How XTL Works</h2>
 
-            <ul className="mt-6 space-y-3 text-white/80">
-              <li>• Directional bias (BUY / SELL)</li>
-              <li>• Entry confirmation logic</li>
-              <li>• Stop-loss and target zones</li>
-              <li>• Confidence score and rationale</li>
-              <li>• Live post-entry monitoring</li>
-            </ul>
-
-            <p className="mt-6 text-white/60">
-              Signals can be used standalone or fed directly into MyBots.
-            </p>
-          </div>
-        </section>
-
-        {/* MYBOTS */}
-        <section id="mybots" className="border-t border-white/10 py-20">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">
-              MyBots — Strategy-Based Automation
-            </h2>
-            <p className="mt-4 max-w-2xl text-white/70">
-              Configure once. Execute consistently. Stay in control.
-            </p>
-
-            <div className="mt-8 grid gap-8 md:grid-cols-2">
-              <div>
-                <h3 className="text-xl font-medium">You configure</h3>
-                <ul className="mt-4 space-y-2 text-white/80">
-                  <li>• Strategy selection</li>
-                  <li>• Symbols and markets</li>
-                  <li>• Risk per trade</li>
-                  <li>• SL / TP / trailing rules</li>
-                  <li>• Trading windows and safety limits</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-medium">Execution modes</h3>
-                <ul className="mt-4 space-y-4 text-white/80">
-                  <li>
-                    <strong>Installer-based execution</strong>
-                    <br />
-                    Run the agent on your local machine or VPS to place and
-                    manage orders.
-                  </li>
-                  <li>
-                    <strong>Fully automated mode</strong>
-                    <br />
-                    Hands-free execution with automatic SL/TP and exit tracking.
-                  </li>
-                </ul>
-              </div>
+            <div className="mt-8 grid gap-6 md:grid-cols-5">
+              {[
+                ["Market Data", "Price & structure signals from your trading environment."],
+                ["Intelligence", "Models + rules convert data into trade context."],
+                ["Decision", "Signals or strategy rules decide actions."],
+                ["Execution", "Local agent places & manages orders."],
+                ["Management", "SL/TP, trailing and exits monitored continuously."],
+              ].map(([t, d]) => (
+                <div key={t} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <div className="text-sm font-semibold text-white">{t}</div>
+                  <div className="mt-2 text-sm text-white/70">{d}</div>
+                </div>
+              ))}
             </div>
 
             <div className="mt-10">
-              <a
-                href={APP_ORIGIN}
-                className="rounded-xl bg-white px-6 py-3 text-sm font-medium text-black hover:bg-white/90"
+              <Link
+                href="/product/architecture"
+                className="inline-flex items-center rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white/90 hover:bg-white/5"
               >
-                Open MyBots
-              </a>
+                View Platform Architecture →
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* AUTOMATION */}
-        <section id="automation" className="border-t border-white/10 py-20">
+        {/* CTA */}
+        <section className="border-t border-white/10 py-16">
           <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">Automation</h2>
-            <p className="mt-4 max-w-2xl text-white/70">
-              Go hands-free: orders, SL/TP, trailing, exits, and monitoring — all
-              tracked continuously without manual intervention.
-            </p>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
+              <h2 className="text-2xl font-semibold md:text-3xl">
+                Start with Signals. Scale to Automation.
+              </h2>
+              <p className="mt-3 max-w-3xl text-white/70">
+                XTL supports a progression: discretionary signals → configurable bots → fully automated trading.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/offerings/signals"
+                  className="rounded-xl bg-white px-6 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
+                >
+                  Explore Offerings
+                </Link>
+
+                <Link
+                  href="/pricing"
+                  className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
+                >
+                  View Pricing
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
-
-        {/* HOW IT WORKS */}
-        <section id="how" className="border-t border-white/10 py-20">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">From Intelligence to Execution</h2>
-
-            <ol className="mt-8 space-y-3 text-white/80">
-              <li>1. AI analyzes market structure and momentum</li>
-              <li>2. Signals are generated with entry and risk logic</li>
-              <li>3. Strategies convert signals into rules</li>
-              <li>4. MyBots execute trades automatically</li>
-              <li>5. SL, TP, and exits are tracked continuously</li>
-            </ol>
-          </div>
-        </section>
-
-        {/* PRICING */}
-        <section id="pricing" className="border-t border-white/10 py-20">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-3xl font-semibold">Pricing</h2>
-            <p className="mt-4 max-w-2xl text-white/70">
-              Coming soon. (We’ll keep the marketing site public; installer downloads will be inside the app after login.)
-            </p>
-          </div>
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="border-t border-white/10 py-20 text-center">
-          <h2 className="text-3xl font-semibold">
-            Start with Signals. Scale to Automation.
-          </h2>
-          <div className="mt-6">
-            <a
-              href={APP_ORIGIN}
-              className="rounded-xl bg-white px-8 py-3 text-sm font-medium text-black hover:bg-white/90"
-            >
-              Open Web App
-            </a>
-          </div>
-        </section>
-      </main>
+      </SiteLayout>
     </>
-  );
-}
-
-/* ---------- helpers ---------- */
-
-function Card({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-      <h3 className="text-lg font-medium">{title}</h3>
-      <p className="mt-2 text-sm text-white/70">{desc}</p>
-    </div>
   );
 }
