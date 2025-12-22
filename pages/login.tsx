@@ -2,7 +2,11 @@ import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
 import SiteLayout from "../components/SiteLayout";
 
-const APP_LOGIN_URL = "https://app.xautrendlab.com/login";
+// App origin (prod / staging safe)
+const APP_ORIGIN = (
+  process.env.NEXT_PUBLIC_APP_ORIGIN ||
+  "https://app.xautrendlab.com"
+).trim();
 
 // IMPORTANT:
 // This is a lightweight gate for marketing -> app.
@@ -27,34 +31,45 @@ export default function LoginGatePage() {
     }
   }, [expected]);
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
 
     const c = (code || "").trim();
 
-    if (!expected) {
-      setErr("Access code not configured. Set NEXT_PUBLIC_XTL_ACCESS_CODE in Cloudflare Pages env vars.");
-      return;
-    }
+    
 
     if (!c) {
       setErr("Please enter your access code.");
       return;
     }
 
-    if (c !== expected) {
-      setErr("Invalid access code. Please check and try again.");
+    try {
+       const res = await fetch("/api/access/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: c }),
+    });
+
+    const j = await res.json();
+    if (!j.ok) {
+      setErr(j.error || "Invalid access code.");
       return;
     }
 
     setOk(true);
+    const app = (
+      process.env.NEXT_PUBLIC_APP_ORIGIN ||
+      "https://app.xautrendlab.com"
+    ).trim();
 
-    // Redirect to app login with a query param (optional)
-    // App can ignore it or use it later.
-    const url = `${APP_LOGIN_URL}?code=${encodeURIComponent(c)}`;
-    window.location.href = url;
+    window.location.href =
+      `${app}/login?preview=1&code=${encodeURIComponent(c)}`;
+  } catch {
+    setErr("Unable to verify code. Please try again.");
   }
+}
+
 
   return (
     <>
