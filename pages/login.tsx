@@ -1,0 +1,123 @@
+import Head from "next/head";
+import { useEffect, useMemo, useState } from "react";
+import SiteLayout from "../components/SiteLayout";
+
+const APP_LOGIN_URL = "https://app.xautrendlab.com/login";
+
+// IMPORTANT:
+// This is a lightweight gate for marketing -> app.
+// It prevents casual users from hitting the app URL.
+// Real authentication stays inside app.xautrendlab.com.
+
+export default function LoginGatePage() {
+  const [code, setCode] = useState("");
+  const [err, setErr] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+
+  // For now: store the allowed code in a Pages env var:
+  // NEXT_PUBLIC_XTL_ACCESS_CODE=YOURCODE
+  const expected = useMemo(() => {
+    return (process.env.NEXT_PUBLIC_XTL_ACCESS_CODE || "").trim();
+  }, []);
+
+  useEffect(() => {
+    // If you didn't set the env var, show a helpful message in UI.
+    if (!expected) {
+      setErr("Login gate is not configured yet. Please set the access code.");
+    }
+  }, [expected]);
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setErr(null);
+
+    const c = (code || "").trim();
+
+    if (!expected) {
+      setErr("Access code not configured. Set NEXT_PUBLIC_XTL_ACCESS_CODE in Cloudflare Pages env vars.");
+      return;
+    }
+
+    if (!c) {
+      setErr("Please enter your access code.");
+      return;
+    }
+
+    if (c !== expected) {
+      setErr("Invalid access code. Please check and try again.");
+      return;
+    }
+
+    setOk(true);
+
+    // Redirect to app login with a query param (optional)
+    // App can ignore it or use it later.
+    const url = `${APP_LOGIN_URL}?code=${encodeURIComponent(c)}`;
+    window.location.href = url;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Login — XauTrendLab</title>
+        <meta
+          name="description"
+          content="Enter your private access code to proceed to the XTL app login."
+        />
+      </Head>
+
+      <SiteLayout
+        title="Login"
+        subtitle="Enter your private Access Code to proceed to the XTL app."
+      >
+        <section className="mx-auto max-w-xl px-6 pb-16">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+            <form onSubmit={submit}>
+              <label className="text-sm font-semibold text-white/90">
+                Access Code
+              </label>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Enter code"
+                className="mt-2 w-full rounded-xl border border-white/15 bg-black/30 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
+                autoComplete="off"
+              />
+
+              {err ? (
+                <div className="mt-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                  {err}
+                </div>
+              ) : null}
+
+              {ok ? (
+                <div className="mt-3 rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
+                  Code verified. Redirecting to app…
+                </div>
+              ) : null}
+
+              <button
+                type="submit"
+                className="mt-5 w-full rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-white/90"
+              >
+                Continue to App
+              </button>
+
+              <div className="mt-5 text-xs text-white/55">
+                Don’t have a code? Purchase a plan or request access from Pricing.
+              </div>
+            </form>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-white/70">
+            <div className="font-semibold text-white/90">Why this gate?</div>
+            <p className="mt-2">
+              We keep app access private to reduce unnecessary traffic and protect the platform.
+              After payment, we provide you a private Access Code.
+            </p>
+          </div>
+        </section>
+      </SiteLayout>
+    </>
+  );
+}
