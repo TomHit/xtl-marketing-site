@@ -34,10 +34,10 @@ export default function LoginGatePage() {
     }
 
     try {
-       const res = await fetch("/api/access/verify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code: c }),
+      const res = await fetch("/api/access/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: c }),
     });
 
     const j = await res.json();
@@ -46,14 +46,14 @@ export default function LoginGatePage() {
       return;
     }
 
-    setOk(true);
-    const app = (
-      process.env.NEXT_PUBLIC_APP_ORIGIN ||
-      "https://app.xautrendlab.com"
-    ).trim();
+    if (!j.token) {
+      setErr("Preview token missing. Please try again.");
+      return;
+    }
 
+    setOk(true);
     window.location.href =
-      `${app}/login?preview=1&code=${encodeURIComponent(c)}`;
+      `https://api.xautrendlab.com/preview/consume?token=${encodeURIComponent(j.token)}`;
   } catch {
     setErr("Unable to verify code. Please try again.");
   }
