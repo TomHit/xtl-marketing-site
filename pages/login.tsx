@@ -18,18 +18,7 @@ export default function LoginGatePage() {
   const [err, setErr] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
 
-  // For now: store the allowed code in a Pages env var:
-  // NEXT_PUBLIC_XTL_ACCESS_CODE=YOURCODE
-  const expected = useMemo(() => {
-    return (process.env.NEXT_PUBLIC_XTL_ACCESS_CODE || "").trim();
-  }, []);
-
-  useEffect(() => {
-    // If you didn't set the env var, show a helpful message in UI.
-    if (!expected) {
-      setErr("Login gate is not configured yet. Please set the access code.");
-    }
-  }, [expected]);
+  
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
