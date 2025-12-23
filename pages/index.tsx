@@ -69,9 +69,8 @@ export default function Home() {
               </Link>
 
               <a
-                href="https://app.xautrendlab.com/react/dashboard?mode=preview"
-                target="_blank"
-                rel="noreferrer"
+                href="/login?next=preview"
+                
                 className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
               >
                 Live Preview
