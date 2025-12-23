@@ -29,12 +29,14 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0b0e]/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" ref={ref}>
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-xl bg-white/10 ring-1 ring-white/10" />
-          <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-wide text-white">XauTrendLab</div>
-            <div className="text-xs text-white/55">XTL Platform</div>
-          </div>
+        <Link href="/" className="flex items-center">
+          <img
+            src="/images/xtl-logo.png"
+            alt="XTL"
+            className="h-7 w-auto"
+          />      
+            
+          
         </Link>
 
         {/* Nav */}
