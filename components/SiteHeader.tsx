@@ -80,10 +80,9 @@ export default function SiteHeader() {
           </a>
 
           <a
-            className="ml-2 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
-            href="/product/overview"
-            target="_blank"
-            rel="noreferrer"
+            
+            href="/login?next=preview"
+            className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black hover:bg-white/90"
           >
             Live Preview
           </a>
