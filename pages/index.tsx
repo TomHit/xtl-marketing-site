@@ -34,53 +34,64 @@ export default function Home() {
         <title>XTL — Trading Intelligence Platform</title>
         <meta
           name="description"
-          content="XTL is a trading intelligence platform. Use Signals, configure MyBots, or run Automated Trading—all inside one product."
+          content="XauTrendLab is an institutional-grade trading intelligence platform supporting signals, strategy execution, and automation—built around defined risk and transparent outcomes."
         />
       </Head>
 
       <SiteLayout>
         {/* HERO */}
         <section className="mx-auto max-w-6xl px-6 pt-16 pb-14">
+          {/* Text + CTAs */}
           <div className="max-w-3xl">
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              Trade Signals with Real Entry, SL & Target Logic
+              Institutional-grade market intelligence for disciplined trading
             </h1>
-            <p className="mt-4 text-lg text-white/70">
-              One product that supports multiple trading paths: Signals for discretionary trading,
-              MyBots for strategy-driven execution, and Automated Trading for hands-free operation.
-            </p>
-            {/* Home hero visual */}
-            <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
-               <img
-                 src="/images/home-intelligence.png"
-                 alt="Institutional market intelligence visualization"
-                 className="h-auto w-full"
-                 loading="lazy"
-               />
-            </div>
 
+            <p className="mt-4 text-lg text-white/70">
+              XauTrendLab is a unified trading intelligence platform supporting
+              discretionary signals, strategy-driven execution, and automation —
+              designed around defined risk, confirmation, and transparent outcomes.
+            </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/product/overview"
                 className="rounded-xl bg-white px-6 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
               >
-                Explore Product
+                Explore Platform
+              </Link>
+
+              <Link
+                href="/pricing"
+                className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
+              >
+                Request Access
               </Link>
 
               <a
-                href={`${APP_ORIGIN}/login`}
+                href="https://app.xautrendlab.com/react/dashboard?mode=preview"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
               >
-                Login to App
+                Live Preview
               </a>
             </div>
 
             <p className="mt-4 text-sm text-white/55">
               Note: Installer downloads are available inside the app after login.
             </p>
+          </div>
+
+          {/* Home hero visual (wide) */}
+          <div className="relative mt-14 overflow-hidden rounded-3xl border border-white/10">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <img
+              src="/images/home-intelligence.png"
+              alt="Institutional market intelligence visualization"
+              className="h-auto w-full"
+              loading="lazy"
+            />
           </div>
         </section>
 
@@ -148,8 +159,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
               <h2 className="text-2xl font-semibold md:text-3xl">
-                XTL is a single platform with multiple ways to trade, depending on how
-                much control you want.
+                One platform. Multiple ways to trade — depending on how much control you want.
               </h2>
               <p className="mt-3 max-w-3xl text-white/70">
                 XTL supports a progression: discretionary signals → configurable bots → fully automated trading.
