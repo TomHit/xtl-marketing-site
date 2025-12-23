@@ -49,6 +49,16 @@ export default function Home() {
               One product that supports multiple trading paths: Signals for discretionary trading,
               MyBots for strategy-driven execution, and Automated Trading for hands-free operation.
             </p>
+            {/* Home hero visual */}
+            <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+               <img
+                 src="/images/home-intelligence.png"
+                 alt="Institutional market intelligence visualization"
+                 className="h-auto w-full"
+                 loading="lazy"
+               />
+            </div>
+
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
