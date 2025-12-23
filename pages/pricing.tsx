@@ -156,7 +156,7 @@ export default function PricingPage() {
             <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-white/60">Already have an access code?</p>
               <Link
-                href="/access"
+                href="/login?next=preview"
                 className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
               >
                 Enter access code →
