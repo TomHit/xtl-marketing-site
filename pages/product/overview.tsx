@@ -34,7 +34,7 @@ export default function ProductOverview() {
                   AI-guided trade ideas with a clean presentation so you can decide and execute.
                 </p>
                 <Link className="mt-4 inline-block text-sm font-semibold text-white/90 hover:text-white" href="/offerings/signals">
-                  Explore Signals →
+                  Learn more →
                 </Link>
               </div>
 

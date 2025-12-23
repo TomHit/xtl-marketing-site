@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 const APP_ORIGIN = "https://app.xautrendlab.com";
 
-type MenuKey = "product" | "offerings" | null;
+type MenuKey = "product" | null;
 
 export default function SiteHeader() {
   const [open, setOpen] = useState<MenuKey>(null);
@@ -65,31 +65,10 @@ export default function SiteHeader() {
             )}
           </div>
 
-          {/* Offerings dropdown */}
-          <div className="relative">
-            <button
-              className={itemBtn}
-              onClick={() => setOpen(open === "offerings" ? null : "offerings")}
-              aria-haspopup="menu"
-              aria-expanded={open === "offerings"}
-            >
-              Offerings
-              <span className="text-white/60">▾</span>
-            </button>
-            {open === "offerings" && (
-              <div className={panel} role="menu" aria-label="Offerings menu">
-                <Link className={linkCls} href="/offerings/signals" onClick={() => setOpen(null)}>
-                  Signals
-                </Link>
-                <Link className={linkCls} href="/offerings/mybots" onClick={() => setOpen(null)}>
-                  MyBots
-                </Link>
-                <Link className={linkCls} href="/offerings/automation" onClick={() => setOpen(null)}>
-                  Automated Trading
-                </Link>
-              </div>
-            )}
-          </div>
+          <Link className={itemBtn} href="/features">
+            Features
+          </Link>
+
 
           <Link className={itemBtn} href="/pricing">
             Pricing
@@ -102,11 +81,11 @@ export default function SiteHeader() {
 
           <a
             className="ml-2 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
-            href={`${APP_ORIGIN}/login`}
+            href="/product/overview"
             target="_blank"
             rel="noreferrer"
           >
-            Login
+            Live Preview
           </a>
         </nav>
 
@@ -114,11 +93,11 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2 md:hidden">
           <a
             className="inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
-            href={`${APP_ORIGIN}/login`}
+            href="/product/overview"
             target="_blank"
             rel="noreferrer"
           >
-            Login
+            Live Preview
           </a>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import SiteHeader from "./SiteHeader";
+import SiteFooter from "./SiteFooter";
 
 export default function SiteLayout({
   children,
@@ -22,16 +23,9 @@ export default function SiteLayout({
 
       <main>{children}</main>
 
-      <footer className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-white/60">
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <div>© {new Date().getFullYear()} XauTrendLab (XTL)</div>
-            <div className="text-white/55">
-              Risk Disclaimer: Trading involves risk. Past performance is not indicative of future results.
-            </div>
-          </div>
-        </div>
-      </footer>
+      
+      <SiteFooter />
+
     </div>
   );
 }

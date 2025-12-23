@@ -6,59 +6,60 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title>Pricing — XauTrendLab</title>
+        <title>Access & Plans — XauTrendLab</title>
         <meta
           name="description"
-          content="Choose a plan for XTL Signals, MyBots, and Automated Trading. Access is provided via a private code after purchase."
+          content="XauTrendLab access model and plans. Controlled onboarding for Signals, MyBots, and Automation."
         />
       </Head>
 
       <SiteLayout
-        title="Pricing"
-        subtitle="Start with Signals, upgrade to MyBots, and go hands-free with Automation. Access is provided via a private code after purchase."
+        title="Access & Plans"
+        subtitle="XauTrendLab uses a controlled access model to ensure stability, transparency, and responsible usage."
       >
         <section className="mx-auto max-w-6xl px-6 pb-16">
+          {/* Intro */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
-            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h2 className="text-xl font-semibold md:text-2xl">Simple plans</h2>
-                <p className="mt-2 max-w-3xl text-sm text-white/70">
-                  Pricing shown is a placeholder. You can replace amounts later. After purchase, you receive a
-                  private Access Code to log in.
-                </p>
-              </div>
-
-              <Link
-                href="/login"
-                className="rounded-xl bg-white px-6 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
-              >
-                Already have a code? Login →
-              </Link>
+            <div className="max-w-3xl">
+              <h2 className="text-xl font-semibold md:text-2xl">
+                A controlled access model
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">
+                XauTrendLab is not an open sign-up platform. Access is provided
+                in stages to maintain system integrity, execution safety, and a
+                consistent experience for all users.
+              </p>
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {/* Access tiers */}
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
               {/* Signals */}
               <div className="rounded-3xl border border-white/10 bg-white/5 p-7">
-                <div className="text-sm font-semibold text-white">Signals</div>
-                <div className="mt-2 text-3xl font-semibold">₹—</div>
-                <div className="mt-1 text-xs text-white/55">per month (placeholder)</div>
+                <div className="text-sm font-semibold text-white">
+                  Signals access
+                </div>
+                <p className="mt-3 text-sm text-white/70">
+                  For discretionary traders who want structured trade ideas,
+                  confirmation-based entries, and defined risk context.
+                </p>
                 <ul className="mt-5 space-y-2 text-sm text-white/70">
-                  <li>• AI-guided signals & direction</li>
-                  <li>• Clean dashboard view</li>
-                  <li>• Best for manual execution</li>
+                  <li>• Opportunity feed with direction & context</li>
+                  <li>• Confirmed BUY / SELL entries</li>
+                  <li>• Stop-loss & target visibility</li>
+                  <li>• Discord alerts for entry & outcome</li>
                 </ul>
                 <div className="mt-6 flex flex-col gap-2">
                   <a
-                    href="mailto:support@xautrendlab.com?subject=XTL%20Signals%20Plan%20Access%20Request"
+                    href="mailto:support@xautrendlab.com?subject=XTL%20Signals%20Access%20Request"
                     className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
                   >
-                    Request Access Code
+                    Request access
                   </a>
                   <Link
-                    href="/offerings/signals"
+                    href="/product/overview"
                     className="rounded-xl border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
                   >
-                    Learn more
+                    Product overview
                   </Link>
                 </div>
               </div>
@@ -66,67 +67,94 @@ export default function PricingPage() {
               {/* MyBots */}
               <div className="rounded-3xl border border-white/15 bg-white/5 p-7 ring-1 ring-white/10">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-semibold text-white">MyBots</div>
+                  <div className="text-sm font-semibold text-white">
+                    MyBots access
+                  </div>
                   <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80">
-                    Popular
+                    Most requested
                   </span>
                 </div>
-                <div className="mt-2 text-3xl font-semibold">₹—</div>
-                <div className="mt-1 text-xs text-white/55">per month (placeholder)</div>
+                <p className="mt-3 text-sm text-white/70">
+                  For users who want rule-based execution with full control over
+                  strategy parameters and risk behavior.
+                </p>
                 <ul className="mt-5 space-y-2 text-sm text-white/70">
-                  <li>• Configure your strategy</li>
-                  <li>• Local installer/agent execution</li>
-                  <li>• Repeatable rules + control</li>
+                  <li>• Strategy configuration & parameters</li>
+                  <li>• Local installer / agent execution</li>
+                  <li>• Repeatable, rules-first behavior</li>
+                  <li>• Pause / resume anytime</li>
                 </ul>
                 <div className="mt-6 flex flex-col gap-2">
                   <a
-                    href="mailto:support@xautrendlab.com?subject=XTL%20MyBots%20Plan%20Access%20Request"
+                    href="mailto:support@xautrendlab.com?subject=XTL%20MyBots%20Access%20Request"
                     className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
                   >
-                    Request Access Code
+                    Request access
                   </a>
                   <Link
-                    href="/offerings/mybots"
+                    href="/product/architecture"
                     className="rounded-xl border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
                   >
-                    Learn more
+                    Architecture & execution
                   </Link>
                 </div>
               </div>
 
               {/* Automation */}
               <div className="rounded-3xl border border-white/10 bg-white/5 p-7">
-                <div className="text-sm font-semibold text-white">Automation</div>
-                <div className="mt-2 text-3xl font-semibold">₹—</div>
-                <div className="mt-1 text-xs text-white/55">per month (placeholder)</div>
+                <div className="text-sm font-semibold text-white">
+                  Automation access
+                </div>
+                <p className="mt-3 text-sm text-white/70">
+                  For experienced users who are ready for hands-free execution
+                  with predefined guardrails and monitoring.
+                </p>
                 <ul className="mt-5 space-y-2 text-sm text-white/70">
-                  <li>• Hands-free trade execution</li>
-                  <li>• SL/TP + monitoring</li>
-                  <li>• Built for scaling</li>
+                  <li>• End-to-end execution & monitoring</li>
+                  <li>• SL / TP & exit management</li>
+                  <li>• Designed for scaling strategies</li>
                 </ul>
                 <div className="mt-6 flex flex-col gap-2">
                   <a
-                    href="mailto:support@xautrendlab.com?subject=XTL%20Automation%20Plan%20Access%20Request"
+                    href="mailto:support@xautrendlab.com?subject=XTL%20Automation%20Access%20Request"
                     className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
                   >
-                    Request Access Code
+                    Request access
                   </a>
                   <Link
-                    href="/offerings/automation"
+                    href="/product/security"
                     className="rounded-xl border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
                   >
-                    Learn more
+                    Security & guardrails
                   </Link>
                 </div>
               </div>
             </div>
 
+            {/* Access model explanation */}
             <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-white/70">
-              <div className="font-semibold text-white/90">Access model (important)</div>
-              <p className="mt-2">
-                To avoid unnecessary traffic to the app, XTL app access is protected. After payment, we provide a
-                private Access Code. Only users with a code can proceed to app login.
+              <div className="font-semibold text-white/90">
+                Why access codes?
+              </div>
+              <p className="mt-2 leading-relaxed">
+                XauTrendLab uses a private access model to prevent misuse,
+                control system load, and ensure users understand the risks of
+                automated and semi-automated trading. After approval, you
+                receive a private access code to log in to the app.
               </p>
+            </div>
+
+            {/* Existing users */}
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-white/60">
+                Already have an access code?
+              </p>
+              <Link
+                href="/access"
+                className="rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white/90 hover:bg-white/5"
+              >
+                Enter access code →
+              </Link>
             </div>
           </div>
         </section>

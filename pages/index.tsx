@@ -43,7 +43,7 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-6 pt-16 pb-14">
           <div className="max-w-3xl">
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              XTL — Trading Intelligence Platform
+              Trade Signals with Real Entry, SL & Target Logic
             </h1>
             <p className="mt-4 text-lg text-white/70">
               One product that supports multiple trading paths: Signals for discretionary trading,
@@ -138,7 +138,8 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
               <h2 className="text-2xl font-semibold md:text-3xl">
-                Start with Signals. Scale to Automation.
+                XTL is a single platform with multiple ways to trade, depending on how
+                much control you want.
               </h2>
               <p className="mt-3 max-w-3xl text-white/70">
                 XTL supports a progression: discretionary signals → configurable bots → fully automated trading.
@@ -149,7 +150,7 @@ export default function Home() {
                   href="/offerings/signals"
                   className="rounded-xl bg-white px-6 py-3 text-center text-sm font-semibold text-black hover:bg-white/90"
                 >
-                  Explore Offerings
+                  Explore Features
                 </Link>
 
                 <Link

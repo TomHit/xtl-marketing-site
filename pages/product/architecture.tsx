@@ -19,7 +19,7 @@ export default function ProductArchitecture() {
         <section className="mx-auto max-w-6xl px-6 pb-16">
           {/* Architecture overview */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
-            <h2 className="text-xl font-semibold md:text-2xl">High-level flow</h2>
+            <h2 className="text-xl font-semibold md:text-2xl">System overview</h2>
 
             <div className="mt-8 grid gap-6 md:grid-cols-5">
               {[
