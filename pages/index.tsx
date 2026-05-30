@@ -5,6 +5,27 @@ import SiteLayout from "../components/SiteLayout";
 
 const APP_ORIGIN = "https://app.xautrendlab.com";
 
+function Logo() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div style={{
+        width: "32px", height: "32px",
+        background: "#D4A843",
+        borderRadius: "6px",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: "'Outfit', sans-serif",
+        fontWeight: 800, fontSize: "14px", color: "#000",
+        letterSpacing: "-0.02em",
+      }}>X</div>
+      <span style={{
+        fontFamily: "'Outfit', sans-serif",
+        fontWeight: 700, fontSize: "16px",
+        color: "#fff", letterSpacing: "0.08em",
+      }}>TRENDLAB</span>
+    </div>
+  );
+}
+
 // ─── Ticker ───────────────────────────────────────────────────────────────────
 const TICKERS = [
   { sym: "XAUUSD", price: "2,347.80", change: "+0.84%", up: true },
@@ -230,8 +251,8 @@ export default function Home() {
         <title>XauTrendLab — The Trading Intelligence That Waits</title>
         <meta name="description" content="XauTrendLab monitors Gold and 5 major forex pairs using AI-powered multi-layer validation. Confirmation-based entries. Built for prop firm evaluations." />
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-          .font-display { font-family: 'Syne', sans-serif; }
+          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+          .font-display { font-family: 'Outfit', sans-serif; }
           @keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
           .animate-ticker { animation: ticker 28s linear infinite; }
           @keyframes fadein { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }

@@ -30,11 +30,14 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" ref={ref}>
         {/* Brand */}
         <Link href="/" className="flex items-center">
-          <img
-            src="/images/xtl-logo.png"
-            alt="XTL"
-            className="h-10 w-auto"
-          />      
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#D4A843] text-black font-black text-sm" style={{fontFamily:"'Outfit',sans-serif"}}>
+              X
+            </div>
+            <span className="font-black text-white tracking-widest text-sm" style={{fontFamily:"'Outfit',sans-serif", letterSpacing:"0.1em"}}>
+              TRENDLAB
+            </span>
+          </div>    
             
           
         </Link>
