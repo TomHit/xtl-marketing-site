@@ -33,7 +33,7 @@ export default function SiteHeader() {
           <img
             src="/images/xtl-logo.png"
             alt="XTL"
-            className="h-7 w-auto"
+            className="h-10 w-auto"
           />      
             
           
