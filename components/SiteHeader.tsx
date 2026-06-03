@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+
 
 const APP_ORIGIN = "https://app.xautrendlab.com";
 
@@ -8,14 +8,7 @@ const APP_ORIGIN = "https://app.xautrendlab.com";
 export default function SiteHeader() {
   
 
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!ref.current) return;
-      if (!ref.current.contains(e.target as Node)) setOpen(null);
-    }
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, []);
+  
 
   const itemBtn =
     "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5";
