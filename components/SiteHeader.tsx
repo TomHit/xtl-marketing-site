@@ -7,7 +7,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0b0e]/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center">
-          <img src="/images/xtl-logo.svg" alt="XauTrendLab" width={56} height={40} />
+          <img src="/images/xtl-logo.svg" alt="XauTrendLab" width={48} height={32} />
         </Link>
         <nav className="hidden items-center gap-2 md:flex">
           <Link className={itemBtn} href="/product">Product</Link>
