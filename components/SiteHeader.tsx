@@ -13,7 +13,7 @@ export default function SiteHeader() {
 
         <nav className="hidden items-center gap-2 md:flex">
           <Link className={itemBtn} href="/product">Product</Link>
-          <Link className={itemBtn} href="/features">Features</Link>
+          <Link className={itemBtn} href="/playbook">Playbook</Link>
           <Link className={itemBtn} href="/pricing">Pricing</Link>
           <a className={itemBtn} href="#" onClick={(e) => e.preventDefault()}>Docs</a>
           <a href="/login?next=preview" className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black hover:bg-white/90">Live Preview</a>

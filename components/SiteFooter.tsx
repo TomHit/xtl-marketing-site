@@ -28,7 +28,7 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/features" className="hover:text-white">
+                <Link href="/playbook" className="hover:text-white">
                   Features
                 </Link>
               </li>
