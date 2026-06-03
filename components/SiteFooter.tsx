@@ -23,18 +23,8 @@ export default function SiteFooter() {
             </div>
             <ul className="mt-3 space-y-2 text-sm text-white/70">
               <li>
-                <Link href="/product/overview" className="hover:text-white">
-                  Overview
-                </Link>
-              </li>
-              <li>
-                <Link href="/product/architecture" className="hover:text-white">
-                  Architecture
-                </Link>
-              </li>
-              <li>
-                <Link href="/product/security" className="hover:text-white">
-                  Security & Execution
+                <Link href="/product" className="hover:text-white">
+                  Product
                 </Link>
               </li>
               <li>

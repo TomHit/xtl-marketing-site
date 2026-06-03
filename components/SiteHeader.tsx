@@ -3,11 +3,10 @@ import { useEffect, useRef, useState } from "react";
 
 const APP_ORIGIN = "https://app.xautrendlab.com";
 
-type MenuKey = "product" | null;
+
 
 export default function SiteHeader() {
-  const [open, setOpen] = useState<MenuKey>(null);
-  const ref = useRef<HTMLDivElement | null>(null);
+  
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -44,31 +43,9 @@ export default function SiteHeader() {
 
         {/* Nav */}
         <nav className="hidden items-center gap-2 md:flex">
-          {/* Product dropdown */}
-          <div className="relative">
-            <button
-              className={itemBtn}
-              onClick={() => setOpen(open === "product" ? null : "product")}
-              aria-haspopup="menu"
-              aria-expanded={open === "product"}
-            >
-              Product
-              <span className="text-white/60">▾</span>
-            </button>
-            {open === "product" && (
-              <div className={panel} role="menu" aria-label="Product menu">
-                <Link className={linkCls} href="/product/overview" onClick={() => setOpen(null)}>
-                  Overview
-                </Link>
-                <Link className={linkCls} href="/product/architecture" onClick={() => setOpen(null)}>
-                  Platform Architecture
-                </Link>
-                <Link className={linkCls} href="/product/security" onClick={() => setOpen(null)}>
-                  Security & Execution
-                </Link>
-              </div>
-            )}
-          </div>
+          <Link className={itemBtn} href="/product">
+            Product
+          </Link>
 
           <Link className={itemBtn} href="/features">
             Features
@@ -97,7 +74,7 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2 md:hidden">
           <a
             className="inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
-            href="/product/overview"
+            href="/product"
             target="_blank"
             rel="noreferrer"
           >
